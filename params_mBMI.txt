@@ -1,0 +1,13 @@
+nam	block	ofs	dependent		predictor	condition	plot	col	hex	table
+a_F	1		Attractiveness	~	Intercept	[woman]	T	1	FFA321	1
+a_M	1		Attractiveness	~	Intercept	[man]	T	2	00AAFF	1
+bST_F	1	0.3	Attractiveness	~	Sextypicality	[woman]	T	1		1
+bST_M	1		Attractiveness	~	Sextypicality	[man]	T	2		1
+bAs_F	1	0.3	Attractiveness	~	Asymmetry	[woman]	T	1		1
+bAs_M	1		Attractiveness	~	Asymmetry	[man]	T	2		1
+bD_F	1	0.3	Attractiveness	~	Distinctiveness	[woman]	T	1		1
+bD_M	1		Attractiveness	~	Distinctiveness	[man]	T	2		1
+bH_F	1	0.3	Attractiveness	~	Height	[woman]	T	1		1
+bH_M	1		Attractiveness	~	Height	[man]	T	2		1
+bBMI_F	1	0.3	Attractiveness	~	BMI	[woman]	T	1		1
+bBMI_M	1		Attractiveness	~	BMI	[man]	T	2		1
