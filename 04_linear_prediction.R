@@ -1,6 +1,7 @@
 #You will need rethinking package and substrRight function
 library(rethinking)
 library(pracma)
+library(scales)
 
 #Load and prepare the data
 source("01_analysis.R")
