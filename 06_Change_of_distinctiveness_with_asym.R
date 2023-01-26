@@ -23,9 +23,6 @@ library(randomcoloR)
 library(mapplots)
 
 #We will focus on czech men
-ds<-sMshape$CZ
-dsave<-Mshape$CZ
-
 #save(ds,dsave,gpsh,file="Czech_demo_asym.Rdata")
 load("Czech_demo_asym.Rdata")
 
