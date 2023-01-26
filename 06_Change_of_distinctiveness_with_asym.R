@@ -32,7 +32,7 @@ asyme2<-NA
 disti1<-NA
 disti2<-NA
 
-for(spec in 1:5){
+for(spec in 1:110){
   d<-dsave
   modify<-d[,,spec]
 
