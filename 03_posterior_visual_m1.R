@@ -7,7 +7,7 @@ substrRight <- function(x, n){
 }
 
 #Load and prepare data
-source("01_analysis.R")
+source("01_data_preparation.R")
 #Load estimated posterior for visualization
 load("m1.Rdata")
 load("m1.prior.Rdata")
