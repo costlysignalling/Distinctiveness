@@ -11,3 +11,5 @@ bH_F	1	0.3	Attractiveness	~	Height	[women]	T	1		1
 bH_M	1		Attractiveness	~	Height	[men]	T	2		1
 bBMI_F	1	0.3	Attractiveness	~	BMI	[women]	T	1		1
 bBMI_M	1		Attractiveness	~	BMI	[men]	T	2		1
+bAge_F	1	0.3	Attractiveness	~	Age	[women]	T	1		1
+bAge_M	1		Attractiveness	~	Age	[men]	T	2		1
