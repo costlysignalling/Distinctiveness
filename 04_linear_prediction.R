@@ -12,6 +12,7 @@ load("posterior_samples_m1.Rdata")
 
 ps<-c("a","bST","bAs","bD")
 chars<-c("Attractiveness","Sextypicality","Asymmetry","Distinctiveness")
+names(d)[which(names(d)=="Sextypicality")]<-"Sextypicality"
 
 #ps<-c("a","bST","bAs","bD","bH","bBMI")
 #chars<-c("Attractiveness","Sextypicality","Asymmetry","Distinctiveness","height","BMI")
@@ -27,14 +28,22 @@ colM2<-c(sapply(3,colorRampPalette(c(colM,"#000000"))))[2]
 
 atlim<-c(1,6)
 
-plotLin<-function(xvar,yvar,main,nat=NULL,aF,aM,bF,bM,mar=c(0.5,3.5,3,0.5),mgp=c(2,0.7,0),cexm=1.1,pcex=0.8,palpha=0.2,xax=T,yax=T){
+plotLin<-function(xvar,yvar,main,nat=NULL,aF,aM,bF,bM,mar=c(0.5,3.5,3,0.5),mgp=c(2,0.7,0),cexm=1.1,pcex=0.8,palpha=0.2,xax=T,yax=T,xlab=NULL,newmin=NULL,newmax=NULL){
   
   par(mar=mar,mgp=mgp)
   
-  pred<-seq(min(d[xvar],na.rm=T),max(d[xvar],na.rm=T),l=100)
+  if(is.null(newmin)){
+    newmin<-min(d[xvar],na.rm=T)
+  }
+  if(is.null(newmax)){
+    newmax<-max(d[xvar],na.rm=T)
+  }
+  
+  pred<-seq(newmin,newmax,l=100)
+  
   atlim<-c(1,6)
   
-  plot(d[[xvar]],d[[yvar]],type="n",xlim=c(min(pred),max(pred)),ylim=atlim,xlab=ifelse(xax==T,xvar,""),ylab=ifelse(yax==T,yvar,""),axes=F,bty="n",xpd=NA)
+  plot(d[[xvar]],d[[yvar]],type="n",xlim=c(min(pred),max(pred)),ylim=atlim,xlab=ifelse(xax==T,ifelse(is.null(xlab),xvar,xlab),""),ylab=ifelse(yax==T,yvar,""),axes=F,bty="n",xpd=NA)
   if(xax==T){
     axis(1,xpd=NA)
   }
@@ -86,9 +95,9 @@ plotLin("Sextypicality","Attractiveness",nat="COL",main="Colombia",aF=nwise$a_F_
 plotLin("Sextypicality","Attractiveness",nat="BRAZ",main="Brazil",aF=nwise$a_F_BRAZ,aM=nwise$a_M_BRAZ,bF=nwise$bST_F_BRAZ,bM=nwise$bST_M_BRAZ,mar=c(0.5,0.5,3,0.5),mgp=c(2,0.7,0),xax=T,yax=F)
 
 
-plotLin("Sextypicality","Attractiveness",nat="NAM",main="Namibia",aF=nwise$a_F_NAM,aM=nwise$a_M_NAM,bF=nwise$bST_F_NAM,bM=nwise$bST_M_NAM,mar=c(3.5,3.5,3,0.5),mgp=c(2,0.7,0),xax=T,yax=T)
-plotLin("Sextypicality","Attractiveness",nat="CMR",main="Cameroon",aF=nwise$a_F_CMR,aM=nwise$a_M_CMR,bF=nwise$bST_F_CMR,bM=nwise$bST_M_CMR,mar=c(3.5,0.5,3,0.5),mgp=c(2,0.7,0),xax=T,yax=F)
-plotLin("Sextypicality","Attractiveness",nat=NULL,main="Total",aF=posts$a_F_mu,aM=posts$a_M_mu,bF=posts$bST_F_mu,bM=posts$bST_M_mu,mar=c(3.5,0.5,3,0.5),mgp=c(2,0.7,0),xax=T,yax=F,palpha=0.1)
+plotLin("Sextypicality","Attractiveness",nat="NAM",main="Namibia",aF=nwise$a_F_NAM,aM=nwise$a_M_NAM,bF=nwise$bST_F_NAM,bM=nwise$bST_M_NAM,mar=c(3.5,3.5,3,0.5),mgp=c(2,0.7,0),xax=T,yax=T,xlab="Sex-typicality")
+plotLin("Sextypicality","Attractiveness",nat="CMR",main="Cameroon",aF=nwise$a_F_CMR,aM=nwise$a_M_CMR,bF=nwise$bST_F_CMR,bM=nwise$bST_M_CMR,mar=c(3.5,0.5,3,0.5),mgp=c(2,0.7,0),xax=T,yax=F,xlab="Sex-typicality")
+plotLin("Sextypicality","Attractiveness",nat=NULL,main="Total",aF=posts$a_F_mu,aM=posts$a_M_mu,bF=posts$bST_F_mu,bM=posts$bST_M_mu,mar=c(3.5,0.5,3,0.5),mgp=c(2,0.7,0),xax=T,yax=F,palpha=0.1,xlab="Sex-typicality")
 
 par(mar=c(0,0,0,0))
 plot(NULL,ylim=c(0,1),xlim=c(0,1),type="n",xaxs="i",yaxs="i",xaxt="n",yaxt="n",bty="n")
@@ -222,6 +231,49 @@ plotLin("BMI","Attractiveness",nat="BRAZ",main="Brazil",aF=nwise$a_F_BRAZ,aM=nwi
 plotLin("BMI","Attractiveness",nat="NAM",main="Namibia",aF=nwise$a_F_NAM,aM=nwise$a_M_NAM,bF=nwise$bBMI_F_NAM,bM=nwise$bBMI_M_NAM,mar=c(3.5,3.5,3,0.5),mgp=c(2,0.7,0),xax=T,yax=T)
 plotLin("BMI","Attractiveness",nat="CMR",main="Cameroon",aF=nwise$a_F_CMR,aM=nwise$a_M_CMR,bF=nwise$bBMI_F_CMR,bM=nwise$bBMI_M_CMR,mar=c(3.5,0.5,3,0.5),mgp=c(2,0.7,0),xax=T,yax=F)
 plotLin("BMI","Attractiveness",nat=NULL,main="Total",aF=posts$a_F_mu,aM=posts$a_M_mu,bF=posts$bBMI_F_mu,bM=posts$bBMI_M_mu,mar=c(3.5,0.5,3,0.5),mgp=c(2,0.7,0),xax=T,yax=F,palpha=0.1)
+
+par(mar=c(0,0,0,0))
+plot(NULL,ylim=c(0,1),xlim=c(0,1),type="n",xaxs="i",yaxs="i",xaxt="n",yaxt="n",bty="n")
+legend("center",c("Women","Men"),pch=22,col=c(colF,colM),pt.bg=c(alpha(colF,0.2),alpha(colM,0.2)),bty="n",ncol=1,pt.cex=1.5,pt.lwd=1.5)
+dev.off()
+
+
+
+
+#Here I will switch to a different model, beause I need slopes for Age
+load("mAge.RData")
+load("posterior_samples_mAge.Rdata")
+
+#Age
+tiff("lines_Age.tif",width=16,height=12,units="cm",res=600,compression = "lzw")
+layout(matrix(1:12,nrow=3,byrow = T),widths=c(1.3,1,1,1),heights = c(1,1,1.3))
+newmin<-18
+newmax<-40
+plotLin("age","Attractiveness",nat="TR",main="Turkey",aF=nwise$a_F_TR,aM=nwise$a_M_TR,bF=nwise$bAge_F_TR,bM=nwise$bAge_M_TR,mar=c(0.5,3.5,3,0.5),mgp=c(2,0.7,0),xax=F,yax=T,newmax=newmax,newmin=newmin)
+plotLin("age","Attractiveness",nat="RO",main="Romania",aF=nwise$a_F_RO,aM=nwise$a_M_RO,bF=nwise$bAge_F_RO,bM=nwise$bAge_M_RO,mar=c(0.5,0.5,3,0.5),mgp=c(2,0.7,0),xax=F,yax=F,newmax=newmax,newmin=newmin)
+plotLin("age","Attractiveness",nat="CZ",main="Czech Republic",aF=nwise$a_F_CZ,aM=nwise$a_M_CZ,bF=nwise$bAge_F_CZ,bM=nwise$bAge_M_CZ,mar=c(0.5,0.5,3,0.5),mgp=c(2,0.7,0),xax=F,yax=F,newmax=newmax,newmin=newmin)
+
+xax=F;yax=F;par(mar=c(0.5,0.5,3,0.5),mgp=c(2,0.7,0))
+plot(d[["age"]],d[["Attractiveness"]],type="n",xlim=c(newmin,newmax),ylim=atlim,xlab=ifelse(xax==T,xvar,""),ylab=ifelse(yax==T,"Attractiveness",""),axes=F,bty="n",xpd=NA)
+pu<-par("usr")
+text((pu[2]+pu[1])/2,(pu[4]+pu[3])/2,"NA",cex=1.5)
+title(main="United Kingdom",adj=0,line=0.5,cex.main=1.1)
+
+xax=F;yax=T;par(mar=c(0.5,3.5,3,0.5),mgp=c(2,0.7,0))
+plot(d[["age"]],d[["Attractiveness"]],type="n",xlim=c(newmin,newmax),ylim=atlim,xlab=ifelse(xax==T,xvar,""),ylab=ifelse(yax==T,"Attractiveness",""),axes=F,bty="n",xpd=NA)
+axis(2,xpd=NA)
+pu<-par("usr")
+text((pu[2]+pu[1])/2,(pu[4]+pu[3])/2,"NA",cex=1.5)
+title(main="India",adj=0,line=0.5,cex.main=1.1)
+
+plotLin("age","Attractiveness",nat="VIE",main="Vietnam",aF=nwise$a_F_VIE,aM=nwise$a_M_VIE,bF
+=nwise$bAge_F_VIE,bM=nwise$bAge_M_VIE,mar=c(0.5,0.5,3,0.5),mgp=c(2,0.7,0),xax=F,yax=F,newmax=newmax,newmin=newmin)
+plotLin("age","Attractiveness",nat="COL",main="Colombia",aF=nwise$a_F_COL,aM=nwise$a_M_COL,bF=nwise$bAge_F_COL,bM=nwise$bAge_M_COL,mar=c(0.5,0.5,3,0.5),mgp=c(2,0.7,0),xax=F,yax=F,newmax=newmax,newmin=newmin)
+plotLin("age","Attractiveness",nat="BRAZ",main="Brazil",aF=nwise$a_F_BRAZ,aM=nwise$a_M_BRAZ,bF=nwise$bAge_F_BRAZ,bM=nwise$bAge_M_BRAZ,mar=c(0.5,0.5,3,0.5),mgp=c(2,0.7,0),xax=T,yax=F,newmax=newmax,newmin=newmin)
+
+plotLin("age","Attractiveness",nat="NAM",main="Namibia",aF=nwise$a_F_NAM,aM=nwise$a_M_NAM,bF=nwise$bAge_F_NAM,bM=nwise$bAge_M_NAM,mar=c(3.5,3.5,3,0.5),mgp=c(2,0.7,0),xax=T,yax=T,newmax=newmax,newmin=newmin)
+plotLin("age","Attractiveness",nat="CMR",main="Cameroon",aF=nwise$a_F_CMR,aM=nwise$a_M_CMR,bF=nwise$bAge_F_CMR,bM=nwise$bAge_M_CMR,mar=c(3.5,0.5,3,0.5),mgp=c(2,0.7,0),xax=T,yax=F,newmax=newmax,newmin=newmin)
+plotLin("age","Attractiveness",nat=NULL,main="Total",aF=posts$a_F_mu,aM=posts$a_M_mu,bF=posts$bAge_F_mu,bM=posts$bAge_M_mu,mar=c(3.5,0.5,3,0.5),mgp=c(2,0.7,0),xax=T,yax=F,palpha=0.1,newmax=newmax,newmin=newmin)
 
 par(mar=c(0,0,0,0))
 plot(NULL,ylim=c(0,1),xlim=c(0,1),type="n",xaxs="i",yaxs="i",xaxt="n",yaxt="n",bty="n")
