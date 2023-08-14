@@ -1,0 +1,7 @@
+nam	block	ofs	dependent		predictor	condition	plot	col	hex	table
+threshold 1-2	1		Attractiveness	~	threshold 1-2		T	1	00FF00	1
+threshold 2-3	1		Attractiveness	~	threshold 2-3		T	2	00FF20	1
+threshold 3-4	1		Attractiveness	~	threshold 3-4		T	3	00FF40	1
+threshold 4-5	1		Attractiveness	~	threshold 4-5		T	4	00FF60	1
+threshold 5-6	1		Attractiveness	~	threshold 5-6		T	5	00FF80	1
+threshold 6-7	1		Attractiveness	~	threshold 6-7		T	6	00FFA0	1
