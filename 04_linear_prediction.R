@@ -4,7 +4,7 @@ library(pracma)
 library(scales)
 
 #Load and prepare the data
-source("01_analysis.R")
+source("01_data_preparation.R")
 
 #Load the model and posterior samples for visualization
 load("m1.RData")
