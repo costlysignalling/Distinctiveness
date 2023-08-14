@@ -3,7 +3,7 @@ start<-Sys.time()
 library(rethinking)
 
 #Load the data
-source("01_analysis.R")
+source("01_data_preparation.R")
 
 #See by sample counts and level orderings
 table(as.integer(as.factor(d$nat)),d$nat)
